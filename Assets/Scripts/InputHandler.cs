@@ -11,11 +11,9 @@ namespace DS5
         [HideInInspector] public float MoveAmount;
         [HideInInspector] public float Vertical;
         [HideInInspector] public float Horizontal;
-        
-        
+
         [SerializeField] private float _mouseX;
         [SerializeField] private float _mouseY;
-        
 
         private PlayerInput _inputActions;
 
@@ -56,5 +54,6 @@ namespace DS5
             _mouseX = _cameraInput.x;
             _mouseY = _cameraInput.y;
         }
+        
     }
 }

@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using DS5;
 
 namespace DS5
 {
     public class PlayerLocomotion : MonoBehaviour
     {
         private InputHandler _inputHandler;
+        private AnimationHandler _animationHandler;
 
         private Transform _cameraObject;
         private Transform _myTransform;
@@ -27,42 +27,48 @@ namespace DS5
         {
             _rigidbody = GetComponent<Rigidbody>();
             _inputHandler = GetComponent<InputHandler>();
-
+            _animationHandler = GetComponentInChildren<AnimationHandler>();
+            
             _cameraObject = Camera.main.transform;
             _myTransform = transform;
+            
+            _animationHandler.Initialize();
         }
 
         private void Update()
         {
             var delta = Time.deltaTime;
                      
-                     _inputHandler.TickInput(delta);
-         
-                     _moveDirection = _cameraObject.forward * _inputHandler.Vertical;
-                     _moveDirection += _cameraObject.right * _inputHandler.Horizontal;
-                     _moveDirection.Normalize();
-                     
-            var speed = _movementSpeed;
-             _moveDirection *= speed;
-                                      
-             Vector3 projectedVelocity = Vector3.ProjectOnPlane(_moveDirection, _normalVector);
-             _rigidbody.velocity = projectedVelocity;
-             
-             HandleRotation(delta);
+            _inputHandler.TickInput(delta);
+            HandleMovement(delta);
         }
-
-        private void PlayerMover()
-        {
-            
         
-            
-        }
 
         #region Movement
 
         private Vector3 _normalVector;
         private Vector3 _targetPosition;
 
+        private void HandleMovement(float delta)
+        {
+            _moveDirection = _cameraObject.forward * _inputHandler.Vertical;
+            _moveDirection += _cameraObject.right * _inputHandler.Horizontal;
+            _moveDirection.Normalize();
+                     
+            var speed = _movementSpeed;
+            _moveDirection *= speed;
+                                      
+            Vector3 projectedVelocity = Vector3.ProjectOnPlane(_moveDirection, _normalVector);
+            _rigidbody.velocity = projectedVelocity;
+             
+
+            _animationHandler.UpdateAnimatorValues(_inputHandler.MoveAmount, 0);
+             
+            if (_animationHandler.CanRotateMovement)
+            {
+                HandleRotation(delta);
+            }
+        }
         private void HandleRotation(float delta)
         {
             var targetDirection = Vector3.zero;
@@ -72,7 +78,7 @@ namespace DS5
             targetDirection += _cameraObject.right * _inputHandler.Horizontal;
 
             targetDirection.Normalize();
-            targetDirection.z = 0;
+            targetDirection.y = 0;
 
             if (targetDirection == Vector3.zero)
             {

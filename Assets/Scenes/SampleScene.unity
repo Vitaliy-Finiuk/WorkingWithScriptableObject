@@ -214,8 +214,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 64536811}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 4.7185, y: 0, z: 4.1874}
+  m_LocalScale: {x: 1.9437268, y: 1, z: 1.8375386}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -235,6 +235,7 @@ GameObject:
   - component: {fileID: 249171726}
   - component: {fileID: 249171725}
   - component: {fileID: 249171724}
+  - component: {fileID: 249171728}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -252,7 +253,7 @@ Animator:
   m_GameObject: {fileID: 249171721}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 67ffdfb5be0ab6c47970e477caefb5fe, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1170617d8fd39fb45a31f69aacdc0605, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -306,7 +307,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoveAmount: 0
   Vertical: 0
-  Horizontal: 10
+  Horizontal: 0
   _mouseX: 0
   _mouseY: 0
 --- !u!54 &249171726
@@ -323,7 +324,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 84
   m_CollisionDetection: 0
 --- !u!136 &249171727
 CapsuleCollider:
@@ -339,6 +340,20 @@ CapsuleCollider:
   m_Height: 1.8
   m_Direction: 1
   m_Center: {x: 0, y: 0.9, z: 0}
+--- !u!114 &249171728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 249171721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95a4034a34877324bb98973491d8b60d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Animator: {fileID: 0}
+  CanRotateMovement: 1
 --- !u!1 &614978667
 GameObject:
   m_ObjectHideFlags: 0
