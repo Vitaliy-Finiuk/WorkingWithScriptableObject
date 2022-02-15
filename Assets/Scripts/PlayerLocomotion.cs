@@ -16,10 +16,10 @@ namespace DS5
 
 
 
-        private Rigidbody _rigidbody;
+        private new Rigidbody _rigidbody;
         private GameObject _normalCamera;
         
-        [Header("Stats")] 
+        [Header("Movement Stats")] 
         [SerializeField] private float _movementSpeed;
         [SerializeField] private float _rotationSpeed;
 
@@ -38,9 +38,6 @@ namespace DS5
         private void Update()
         {
             var delta = Time.deltaTime;
-                     
-            _inputHandler.TickInput(delta);
-            HandleMovement(delta);
         }
         
 
@@ -49,7 +46,7 @@ namespace DS5
         private Vector3 _normalVector;
         private Vector3 _targetPosition;
 
-        private void HandleMovement(float delta)
+        public void HandleMovement(float delta)
         {
             _moveDirection = _cameraObject.forward * _inputHandler.Vertical;
             _moveDirection += _cameraObject.right * _inputHandler.Horizontal;
@@ -58,7 +55,7 @@ namespace DS5
             var speed = _movementSpeed;
             _moveDirection *= speed;
                                       
-            Vector3 projectedVelocity = Vector3.ProjectOnPlane(_moveDirection, _normalVector);
+            var projectedVelocity = Vector3.ProjectOnPlane(_moveDirection, _normalVector);
             _rigidbody.velocity = projectedVelocity;
              
 
