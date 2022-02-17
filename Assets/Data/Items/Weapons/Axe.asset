@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 459156f407a3bdf4ab3126def20cb87d, type: 3}
-  m_Name: LightSword
+  m_Name: Axe
   m_EditorClassIdentifier: 
   ItemIcon: {fileID: 0}
-  ItemName: Light Sword
-  ModelPrefab: {fileID: 8116409393523363187, guid: 4bcefca7a2da5454f866a973d62ac020, type: 3}
+  ItemName: Axe
+  ModelPrefab: {fileID: 1776472905282870, guid: 1fa34df54f1414448b502a85dfa4a95c, type: 3}
   _isUnarmed: 0
-  Right_hand_idle: Right_Arm_Idle_01
+  Right_hand_idle: Right_Arm_Idle_02
   Left_hand_idle: Left_Arm_Idle_01
   OH_Light_Attack: 

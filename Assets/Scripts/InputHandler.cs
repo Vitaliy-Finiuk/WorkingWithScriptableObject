@@ -12,14 +12,22 @@ namespace DS5
         [HideInInspector] public float Vertical;
         [HideInInspector] public float Horizontal;
 
-        [SerializeField] private float _mouseX;
-        [SerializeField] private float _mouseY;
+        public bool d_Pad_Up;
+        public bool d_Pad_Down;
+        public bool d_Pad_Left;
+        public bool d_Pad_Right;
 
         private PlayerInput _inputActions;
+        private PlayerInventory _playerInventory;
 
         private Vector2 _movementInput;
-        private Vector2 _cameraInput;
 
+
+        private void Start()
+        {
+            _playerInventory = GetComponent<PlayerInventory>();
+        }
+        
 
         public void OnEnable()
         {
@@ -28,8 +36,6 @@ namespace DS5
                 _inputActions = new PlayerInput();
                 _inputActions.PlayerMovement.Movement.performed +=
                     _inputActions => _movementInput = _inputActions.ReadValue<Vector2>();
-
-                _inputActions.PlayerMovement.Camera.performed += i => _cameraInput = i.ReadValue<Vector2>();
             }
             
             _inputActions.Enable();
@@ -43,6 +49,7 @@ namespace DS5
         public void TickInput(float delta)
         {
             MovementInput(delta);
+            HandleQuickSlotsInput();
         }
 
         private void MovementInput(float delta)
@@ -51,9 +58,22 @@ namespace DS5
             Vertical = _movementInput.y;
 
             MoveAmount = Mathf.Clamp01(Mathf.Abs(Horizontal) + Mathf.Abs(Vertical));
-            _mouseX = _cameraInput.x;
-            _mouseY = _cameraInput.y;
+
         }
-        
+
+        private void HandleQuickSlotsInput()
+        {
+            _inputActions.PlayerQuickSlots.DPadRight.performed += i => d_Pad_Right = true;
+            _inputActions.PlayerQuickSlots.DPadleft.performed += i => d_Pad_Left = true;
+            
+            if (d_Pad_Right)
+            {
+                _playerInventory.ChangeInRightHandWeapon();
+            }
+            else if (d_Pad_Left)
+            {
+                _playerInventory.ChangeInLeftHandWeapon();
+            }
+        }
     }
 }

@@ -12,8 +12,8 @@ namespace DS5
         public bool IsLeftHandSlot;
         public bool IsRightHandSlot;
 
-        
-        public void UnloadWeapon()
+
+        private void UnloadWeapon()
         {
             if (_currentWeaponModel != null)
             {
@@ -21,7 +21,7 @@ namespace DS5
             }
         }
 
-        public void UnloadWeaponAndDestroy()
+        private void UnloadWeaponAndDestroy()
         {
             if (_currentWeaponModel != null)
             {

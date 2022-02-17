@@ -5,12 +5,14 @@ using UnityEngine;
 
 namespace DS5
 {
+    
+    [RequireComponent(typeof(Rigidbody), typeof(InputHandler), typeof(AnimationHandler))]
     public class PlayerLocomotion : MonoBehaviour
     {
         private InputHandler _inputHandler;
         private AnimationHandler _animationHandler;
 
-        private Transform _cameraObject;
+        [SerializeField] private Transform _cameraObject;
         private Transform _myTransform;
         private Vector3 _moveDirection;
 
@@ -29,18 +31,12 @@ namespace DS5
             _inputHandler = GetComponent<InputHandler>();
             _animationHandler = GetComponentInChildren<AnimationHandler>();
             
-            _cameraObject = Camera.main.transform;
+
             _myTransform = transform;
             
             _animationHandler.Initialize();
         }
-
-        private void Update()
-        {
-            var delta = Time.deltaTime;
-        }
         
-
         #region Movement
 
         private Vector3 _normalVector;
